@@ -1,0 +1,11 @@
+services:
+  bot:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./system_prompt.txt:/app/system_prompt.txt
+    environment:
+      DB_PATH: /app/data/memory.db
+    restart: unless-stopped

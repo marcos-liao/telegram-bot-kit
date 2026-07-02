@@ -1,0 +1,23 @@
+# Optional overlay: bundles a local Ollama server so you can run everything with
+# no external LLM setup. Usage:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.ollama.yml up -d
+#   docker compose exec ollama ollama pull llama3.1
+#   docker compose exec ollama ollama pull nomic-embed-text
+#
+# Then set in your .env:
+#   LLM_BASE_URL=http://ollama:11434/v1
+#   EMBED_BASE_URL=http://ollama:11434/v1
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  bot:
+    depends_on:
+      - ollama
+
+volumes:
+  ollama_data:

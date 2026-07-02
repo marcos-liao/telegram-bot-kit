@@ -1,0 +1,12 @@
+.env
+memory.db
+memory.db-journal
+memory.db-wal
+memory.db-shm
+__pycache__/
+*.pyc
+venv/
+.venv/
+.staging/
+data/
+*.log

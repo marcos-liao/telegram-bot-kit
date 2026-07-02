@@ -1,0 +1,16 @@
+[Unit]
+Description=Telegram Bot Kit
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=YOUR_LINUX_USER
+WorkingDirectory=/path/to/telegram-bot-kit
+EnvironmentFile=/path/to/telegram-bot-kit/.env
+ExecStart=/path/to/telegram-bot-kit/venv/bin/python /path/to/telegram-bot-kit/bot.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
