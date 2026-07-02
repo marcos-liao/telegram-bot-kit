@@ -38,7 +38,7 @@ Everything else (SearXNG, Kroki, database) is bundled and needs no decision.
 ## Quick start
 
 ```
-git clone <this-repo-url>
+git clone https://github.com/marcos-liao/telegram-bot-kit.git
 cd telegram-bot-kit
 ./install.sh
 ```
