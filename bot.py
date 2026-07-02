@@ -104,19 +104,22 @@ def is_admin(uid):
 # ----------------------------- Bot info (static command content) -----------------------------
 # Edit these strings (or set your own persona in system_prompt.txt) to brand the bot.
 START_TIME = time.time()
+_DEFAULT_SKILL_TEXT = (
+    "Here's what I can do 👇\n\n"
+    "• 🔍 Real-time web search — current news, prices, schedules, and other up-to-date topics.\n\n"
+    "• 💬 Conversation memory — I remember context from this session so you don't have to repeat yourself.\n\n"
+    "• 📝 Text tasks — writing, summarizing, translation, brainstorming, editing, drafting messages.\n\n"
+    "• 📄 Document Q&A — upload a file (PDF, Word, Excel, PowerPoint, txt, image) and ask about it.\n\n"
+    "• 🖼️ Vision & image tools — describe photos, search images, edit images, build diagrams.\n\n"
+    "• 🛠️ Network diagnostics — ping, DNS, whois, subnet calculations.\n\n"
+    "• ⚡ Available 24/7 on Telegram, fast responses."
+)
+# /name, /owner, /skill are config-driven (set via .env) — edit .env, not this file,
+# to rebrand the bot. BOT_SKILL supports \n for line breaks (e.g. "Line one\nLine two").
 INFO = {
-    "name": "🤖 *Telegram Bot Kit* — a generic AI assistant bot.",
-    "owner": "👤 Owner: (edit INFO['owner'] in bot.py)",
-    "skill": (
-        "Here's what I can do 👇\n\n"
-        "• 🔍 Real-time web search — current news, prices, schedules, and other up-to-date topics.\n\n"
-        "• 💬 Conversation memory — I remember context from this session so you don't have to repeat yourself.\n\n"
-        "• 📝 Text tasks — writing, summarizing, translation, brainstorming, editing, drafting messages.\n\n"
-        "• 📄 Document Q&A — upload a file (PDF, Word, Excel, PowerPoint, txt, image) and ask about it.\n\n"
-        "• 🖼️ Vision & image tools — describe photos, search images, edit images, build diagrams.\n\n"
-        "• 🛠️ Network diagnostics — ping, DNS, whois, subnet calculations.\n\n"
-        "• ⚡ Available 24/7 on Telegram, fast responses."
-    ),
+    "name": os.environ.get("BOT_NAME", "🤖 *Telegram Bot Kit* — a generic AI assistant bot."),
+    "owner": os.environ.get("BOT_OWNER", "👤 Owner: (set BOT_OWNER in .env)"),
+    "skill": os.environ.get("BOT_SKILL", _DEFAULT_SKILL_TEXT).replace("\\n", "\n"),
 }
 
 # Fallback only — the live prompt is loaded from SYSTEM_PROMPT_PATH by get_system_prompt().
