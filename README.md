@@ -22,6 +22,19 @@ features baked in.
 scheduled reminders. This kit is intentionally a lean, generic assistant —
 fork it if you need those.
 
+## Before you start
+
+You need two things decided before running `install.sh`:
+
+1. **A Telegram bot token** — get one from [@BotFather](https://t.me/BotFather).
+2. **An LLM backend** — either your own OpenAI-compatible endpoint (OpenAI,
+   Groq, OpenRouter, a remote Ollama server, etc.), or the bundled Ollama
+   option if you don't have one yet. Read [LLM backend options](#llm-backend-options)
+   below and pick one *before* you run the final `docker compose up` step —
+   the bot won't work without a valid `LLM_BASE_URL`.
+
+Everything else (SearXNG, Kroki, database) is bundled and needs no decision.
+
 ## Quick start
 
 ```
@@ -38,10 +51,8 @@ and put it in `.env`**. Re-run `./install.sh` (or `docker compose up -d --build`
 once that's done and it brings everything up — the bot, plus bundled SearXNG
 (web search) and Kroki+Mermaid (diagram rendering), no separate installs needed.
 
-You'll also want to set an LLM backend in `.env` before that final step (see
-below) — `install.sh` reminds you of this too. Optionally edit
-`system_prompt.txt` to give the bot its own persona — it's reloaded live, no
-restart needed.
+Optionally edit `system_prompt.txt` to give the bot its own persona — it's
+reloaded live, no restart needed.
 
 Prefer to do it by hand instead of running the script? Same steps, manually:
 copy `.env.example` to `.env`, fill in `TELEGRAM_TOKEN` and an LLM backend,
