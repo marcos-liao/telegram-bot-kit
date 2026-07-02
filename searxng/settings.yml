@@ -1,0 +1,16 @@
+# Minimal override on top of SearXNG's built-in defaults (use_default_settings
+# merges this with the image's baked-in settings.yml — see SearXNG docs).
+use_default_settings: true
+
+server:
+  # Change this before exposing SearXNG (or this bot) to the public internet.
+  secret_key: "please-change-this-secret-before-deploying-publicly"
+  # This instance is private (only reachable by the bot on the Docker network),
+  # so the bot-detection rate limiter is disabled to avoid blocking the JSON API.
+  limiter: false
+
+search:
+  # The bot needs JSON output; SearXNG disables it by default for public instances.
+  formats:
+    - html
+    - json

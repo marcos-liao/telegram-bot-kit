@@ -8,4 +8,33 @@ services:
       - ./system_prompt.txt:/app/system_prompt.txt
     environment:
       DB_PATH: /app/data/memory.db
+      # Point at the bundled SearXNG/Kroki services below (overrides .env so
+      # this works out of the box under `docker compose up`).
+      SEARXNG_URL: http://searxng:8080
+      KROKI_URL: http://kroki:8000
+    depends_on:
+      searxng:
+        condition: service_started
+      kroki:
+        condition: service_started
+    restart: unless-stopped
+
+  # Powers web_search / web_image_search.
+  searxng:
+    image: searxng/searxng:latest
+    volumes:
+      - ./searxng:/etc/searxng:rw
+    restart: unless-stopped
+
+  # Powers buat_diagram (graphviz native; mermaid needs the companion below).
+  kroki:
+    image: yuzutech/kroki:latest
+    environment:
+      KROKI_MERMAID_HOST: mermaid
+    depends_on:
+      - mermaid
+    restart: unless-stopped
+
+  mermaid:
+    image: yuzutech/kroki-mermaid:latest
     restart: unless-stopped

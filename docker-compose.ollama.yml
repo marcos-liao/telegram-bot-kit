@@ -17,7 +17,8 @@ services:
 
   bot:
     depends_on:
-      - ollama
+      ollama:
+        condition: service_started
 
 volumes:
   ollama_data:

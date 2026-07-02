@@ -35,6 +35,10 @@ fork it if you need those.
    docker compose up -d --build
    ```
 
+`docker compose up` brings up the bot **plus** a bundled SearXNG (web search)
+and Kroki+Mermaid (diagram rendering) — no separate installs needed for those.
+The only prerequisite you must supply yourself is an LLM (see below).
+
 ## LLM backend options
 
 **Option A — bring your own endpoint (default).** Point `LLM_BASE_URL` at any
@@ -60,15 +64,17 @@ separately from chat (`EMBED_BASE_URL`/`EMBED_API_KEY`/`EMBED_MODEL`), since
 not every OpenAI-compatible provider offers an embeddings endpoint. They
 default to the `LLM_*` values if left unset.
 
-## Optional: web search & diagrams
+## Web search & diagrams
 
-- Web search needs a [SearXNG](https://docs.searxng.org/) instance — set
-  `SEARXNG_URL`.
-- Diagram generation needs a [Kroki](https://kroki.io/) instance — set
-  `KROKI_URL`. You can self-host both with Docker.
+`docker compose up` already includes these — [SearXNG](https://docs.searxng.org/)
+for web search (config at `searxng/settings.yml`, JSON output enabled since
+the bot needs it) and [Kroki](https://kroki.io/) + a Mermaid companion for
+diagram rendering. Nothing to install separately.
 
-If neither is configured, the bot still works — those specific tools will
-just fail gracefully when invoked.
+If you're running `bot.py` directly without Docker (see below), point
+`SEARXNG_URL`/`KROKI_URL` in `.env` at instances you run yourself. If neither
+is configured, the bot still works — those specific tools just fail
+gracefully when invoked.
 
 ## Running without Docker
 
