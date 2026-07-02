@@ -24,20 +24,28 @@ fork it if you need those.
 
 ## Quick start
 
-1. Copy `.env.example` to `.env` and fill in `TELEGRAM_TOKEN` (get one from
-   [@BotFather](https://t.me/BotFather)).
-2. Choose an LLM backend (see below) and set `LLM_BASE_URL` / `LLM_API_KEY` /
-   `LLM_MODEL` accordingly.
-3. Optionally edit `system_prompt.txt` to give the bot its own persona — it's
-   reloaded live, no restart needed.
-4. Run it:
-   ```
-   docker compose up -d --build
-   ```
+```
+git clone <this-repo-url>
+cd telegram-bot-kit
+./install.sh
+```
 
-`docker compose up` brings up the bot **plus** a bundled SearXNG (web search)
-and Kroki+Mermaid (diagram rendering) — no separate installs needed for those.
-The only prerequisite you must supply yourself is an LLM (see below).
+`install.sh` installs Docker (if it's not already on the machine — this is
+meant to run on a fresh server, like an XAMPP-style installer), copies
+`.env.example` to `.env`, then stops and tells you the one thing that truly
+can't be automated: **get a bot token from [@BotFather](https://t.me/BotFather)
+and put it in `.env`**. Re-run `./install.sh` (or `docker compose up -d --build`)
+once that's done and it brings everything up — the bot, plus bundled SearXNG
+(web search) and Kroki+Mermaid (diagram rendering), no separate installs needed.
+
+You'll also want to set an LLM backend in `.env` before that final step (see
+below) — `install.sh` reminds you of this too. Optionally edit
+`system_prompt.txt` to give the bot its own persona — it's reloaded live, no
+restart needed.
+
+Prefer to do it by hand instead of running the script? Same steps, manually:
+copy `.env.example` to `.env`, fill in `TELEGRAM_TOKEN` and an LLM backend,
+then `docker compose up -d --build`.
 
 ## LLM backend options
 
